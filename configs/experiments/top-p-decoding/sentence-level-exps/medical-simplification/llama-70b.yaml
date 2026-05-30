@@ -1,0 +1,36 @@
+connection_configs:
+    api_key: ""
+    base_url: http://localhost:8893/v1
+    
+model_configs:
+  model_name: meta-llama/Llama-3.3-70B-Instruct
+  model_device: vllm
+  gen_kwargs:
+    temperature: 1.0
+    top_p: 0.9
+    max_tokens: 1000
+# connection_configs:
+#     api_key: configs/api_keys/fireworks.txt
+#     base_url: https://api.fireworks.ai/inference/v1
+    
+# model_configs:
+#   model_name: accounts/fireworks/models/llama-v3p3-70b-instruct
+#   model_device: openai
+#   gen_kwargs:
+#     temperature: 1.0
+#     top_p: 0.9
+#     max_tokens: 1000
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "You are simplifying a single sentence from the Findings section of a radiology report.\n\n\nInstructions:\n- Rewrite the sentence in simpler and clearer language.\n- Preserve all clinical information.\n- Do not add new findings or interpretations.\n- Do not omit medically important details.\n- Keep the output as a single sentence.\n- Use concise and natural wording.\n- Avoid unnecessary medical jargon when possible."
+  n_turns: 5
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/top-p-sampling/sentence-level/simplify-medical-finding/llama-v3p3-70b-instruct.jsonl
+  
+data_configs:
+  input_path: data/preprocessed/MIMIC-CXR_combined_800.csv
+  jinja_template: |
+    {{ sentence }}
+
+

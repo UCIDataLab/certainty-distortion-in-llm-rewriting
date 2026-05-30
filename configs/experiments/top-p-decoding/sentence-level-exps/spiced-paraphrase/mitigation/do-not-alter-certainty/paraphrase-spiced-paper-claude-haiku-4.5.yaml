@@ -1,0 +1,24 @@
+connection_configs:
+    api_key: configs/api_keys/anthropic.txt
+    base_url: https://api.anthropic.com/v1/
+
+model_configs:
+  model_name: claude-haiku-4-5-20251001
+  model_device: openai
+  gen_kwargs:
+    # temperature: 1.0
+    top_p: 0.9
+    max_tokens: 1000
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "Your task is to paraphrase an English text. When paraphrasing, avoid copying phrases from the provided text. Your paraphrase must be 1 sentence long and should preserve semantic meaning. Do not hallucinate. Preserve the degree of certainty in the original text. Return **only** the paraphrased text."
+  n_turns: 1
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/mitigation/sentence-level/do-not-alter-certainty/paraphrase-spiced-paper/claude-haiku-4-5.jsonl
+
+data_configs:
+  input_path: data/preprocessed/SPICED-news.csv
+  jinja_template: |
+    {{ Paper_Finding }}
+

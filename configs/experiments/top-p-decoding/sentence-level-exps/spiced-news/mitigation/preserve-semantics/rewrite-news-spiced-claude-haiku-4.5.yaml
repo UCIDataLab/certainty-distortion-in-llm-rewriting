@@ -1,0 +1,23 @@
+connection_configs:
+    api_key: configs/api_keys/anthropic.txt
+    base_url: https://api.anthropic.com/v1/
+
+model_configs:
+  model_name: claude-haiku-4-5-20251001
+  model_device: openai
+  gen_kwargs:
+    top_p: 0.9
+    max_tokens: 1000
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "Imagine you are a New York Times journalist. Rewrite the following scientific finding as **one sentence** suitable for publication. Preserve semantics of the original text. Return **only** the sentence."
+  n_turns: 5
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/mitigation/sentence-level/preserve-semantics/rewrite-spiced-news/claude-haiku-4-5.jsonl
+
+data_configs:
+  input_path: data/preprocessed/SPICED-news.csv
+  jinja_template: |
+    {{ Paper_Finding }}
+

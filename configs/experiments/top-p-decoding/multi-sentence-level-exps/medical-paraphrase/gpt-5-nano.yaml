@@ -1,0 +1,26 @@
+connection_configs:
+    api_key: configs/api_keys/openai.txt
+
+model_configs:
+  model_name: gpt-5.4-nano
+  model_device: openai
+  gen_kwargs:
+    temperature: 1.0
+    top_p: 0.9
+    max_completion_tokens: 3500
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "Your task is to paraphrase an English text. When paraphrasing, avoid copying phrases from the provided text. The paraphrase should be no longer than {n_sentences} sentences. Return **only** the paraphrased text. Do not include a header, preamble, or any text outside the paraphrased text."
+  n_turns: 1
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/top-p-sampling/multi-sentence-level/medical-paraphrase/gpt-5-nano.jsonl
+
+data_configs:
+  input_path: data/preprocessed/MIMIC-CXR_uncertain_only__800.csv
+  jinja_template: |
+    FINDINGS: 
+    
+    {{ FINDINGS }}
+
+

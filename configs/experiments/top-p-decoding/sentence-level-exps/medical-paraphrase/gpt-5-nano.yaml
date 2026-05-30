@@ -1,0 +1,24 @@
+connection_configs:
+    api_key: configs/api_keys/openai.txt
+
+model_configs:
+  model_name: gpt-5.4-nano
+  model_device: openai
+  gen_kwargs:
+    temperature: 1.0
+    top_p: 0.9
+    max_completion_tokens: 1000
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "Paraphrase this radiology findings sentence. Your paraphrase must be 1 sentence long. Return **only** the paraphrased text."
+  n_turns: 5
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/top-p-sampling/sentence-level/paraphrase-medical-finding/gpt-5-nano.jsonl
+  
+data_configs:
+  input_path: data/preprocessed/MIMIC-CXR_combined_800.csv
+  jinja_template: |
+    {{ sentence }}
+
+

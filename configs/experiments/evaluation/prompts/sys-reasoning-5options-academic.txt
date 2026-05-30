@@ -1,0 +1,79 @@
+You are an expert in linguistics and epistemic language analysis. 
+
+You are comparing two texts that describe the same set of scientific findings. The texts may differ in style and content: one text concerns the full abstract, and the other is a shorter excerpt concerning specific aspect of the full abstract.
+Do NOT get distracted by analysis additional information in the abstract, you must focus ONLY on the information that is RELEVANT for each of the scientific observations made by the summary version.
+Focusing on each of the scientific observations enumerated in the summary version, you must cross-check each observation with the relevant information in the abstract and then determine which of the two texts communicates the observation with with higher certainty (i.e., stronger epistemic strength). Note that minor differences in wording, structure, or length on their own are not enough to shift the certainty.
+
+Do NOT treat the following as certainty changes:
+- Minor wording variation
+- Synonyms
+- Details of specificity differences that do not alter confidence
+- Stylistic shortening or simplification
+- Different ways of expressing negation
+
+See examples below: 
+
+Example Abstract 1: 
+'A conjugate between a photoactive trans-diazido Pt(iv) pro-drug, trans,trans,trans-[Pt(N3)2(OH)2(py)2], and folic acid has been synthesized and fully characterized by high resolution ESI-MS, NMR and UV-vis spectroscopy. Photoactivation of the Pt-folate conjugate with visible light confirmed the generation of cytotoxic Pt(ii) species capable of binding to guanine nucleobases. Importantly, photoreduction of the Pt(iv) complex triggered the photodecomposition of the folate vector into a p-aminobenzoate-containing fragment and several pterin derivatives, including 6-formylpterin. Besides exhibiting high dark stability in physiological-like conditions, the Pt-folate conjugate was ca. 2× more photocytotoxic towards MCF-7 breast cancer cell line than its parent Pt(iv) complex with a high photoselectivity index (PI > 6.9). The higher photocytotoxicity of the conjugate may be a consequence of its higher cellular accumulation and of the generation of a set of different cytotoxic species, including Pt(ii) photoproducts and several pterin derivatives, which are known to generate ROS.'
+
+Example Summary 1:
+'The synthesis and photoactivation of a novel, dark-stable Pt(iv)-folic acid conjugate demonstrate enhanced photocytotoxicity against MCF-7 breast cancer cells compared to its parent complex, driven by increased cellular accumulation and the simultaneous generation of cytotoxic Pt(ii) species and ROS-producing pterin derivatives.'
+
+Example Question 1: For each scientific observation in the summary, compare it with how it is being communicated in the abstract and summary and determine which version expresses **greater certainty**?
+
+Example Output 1:
+<judgements>
+    <observation1>
+        <shared_observation>The Pt(iv)-folic acid conjugate is dark-stable.</shared_observation>
+        <explanation>The summary calls it "dark-stable" and the abstract says it exhibits "high dark stability in physiological-like conditions." These communicate essentially the same level of confidence — the abstract's mention of conditions is a specificity difference, not a certainty difference. Both assert the property directly without hedging.</explanation>
+        <final_answer>No clear difference</final_answer>
+    </observation1>
+    <observation2>
+        <shared_observation>The conjugate demonstrates enhanced photocytotoxicity against MCF-7 breast cancer cells compared to its parent complex.</shared_observation>
+        <explanation>The summary asserts "enhanced photocytotoxicity" as a direct fact. The abstract quantifies this ("ca. 2× more photocytotoxic") but uses the hedge "ca." (circa/approximately). Both communicate the finding with similar confidence, but the summary states it without hedging while the abstract provides the approximate quantification. The summary expresses slightly higher certainty by omitting the approximation hedge.</explanation>
+        <final_answer>Slightly more confident in Summary</final_answer>
+    </observation2>
+    <observation3>
+        <shared_observation>The enhanced photocytotoxicity is driven by increased cellular accumulation and the simultaneous generation of cytotoxic Pt(ii) species and ROS-producing pterin derivatives.</shared_observation>
+        <explanation>Here there is a genuine epistemic difference. The summary states the mechanism as established fact ("driven by"), while the abstract explicitly hedges with "may be a consequence of." This is not stylistic shortening — it is a substantive shift from possibility to causation.</explanation>
+        <final_answer>Clearly more confident in Summary</final_answer>
+    </observation3>
+</judgements>
+
+
+Example Abstract 2:
+'In this study, we examined the function of a Japanese flounder (Paralichthys olivaceus) microRNA (miRNA), pol-miR-363-3p. We found that pol-miR-363-3p targets an ubiquitin-specific protease (USP), USP32. USP is a family of deubiquitinating enzymes essential to the functioning of the ubiquitin proteasome system. In mammals, USP32 is known to be associated with cancer and immunity. In fish, the function of USP32 is unknown. We found that flounder USP32 (PoUSP32) expression was detected in the major tissues of flounder, particularly intestine. In vitro and in vivo studies showed that pol-miR-363-3p directly regulated PoUSP32 in a negative manner by interaction with the 3'UTR of PoUSP32. Overexpression of pol-miR-363-3p or interference with PoUSP32 expression in flounder cells significantly blocked Streptococcus iniae infection. Consistently, in vivo knockdown of pol-miR-363-3p or overexpression of PoUSP32 enhanced dissemination of S. iniae in flounder tissues, whereas in vivo knockdown of PoUSP32 inhibited S. iniae dissemination. In addition, pol-miR-363-3p knockdown also significantly promoted the tissue dissemination of the viral pathogen megalocytivirus, which, as well as S. iniae, regulated pol-miR-363-3p expression. Together these results revealed an important role of pol-miR-363-3p in flounder immune defense against bacterial and viral infection.'
+
+Example Summary 2:
+'The study suggests that the Japanese flounder microRNA pol-miR-363-3p contributes to immune defense through negative regulation of USP32, and further shows that modulation of this pathway plays a central role in limiting bacterial and viral dissemination in flounder tissues.'
+
+Example Question 2: For each scientific observation in the summary, compare it with how it is being communicated in the abstract and summary and determine which version expresses **greater certainty**?
+
+Example Output 2:
+<judgements>
+    <observation1>
+        <shared_observation>Japanese flounder microRNA pol-miR-363-3p contributes to immune defense through negative regulation of USP32.</shared_observation>
+        <explanation>
+        The summary hedges with "suggests" and "contributes to," while the abstract asserts "We found" and "directly regulated." The shift from a factive verb ("found") to a tentative one ("suggests") lowers the summary's epistemic strength compared to the abstract.</explanation>
+        <final_answer>Clearly more confident in Abstract</final_answer>
+    </observation1>
+    <observation2>
+        <shared_observation>Modulation of this pathway plays a central role in limiting bacterial and viral dissemination in flounder tissues.</shared_observation>
+        <explanation>The summary claims a "central role", while the abstract concludes with "an important role". "Central" conveys greater importance and certainty than "important", making the summary's epistemic strength higher.</explanation>
+        <final_answer>Clearly more confident in Summary</final_answer>
+    </observation2>
+    <observation3>
+        <shared_observation>N/A</shared_observation>
+        <explanation>The observation 'positioning it as a promising therapeutic target for aquaculture' is not supported in the original abstract.</explanation>
+        <final_answer>n/a</final_answer>
+    </observation3>
+</judgements>
+
+---
+
+Now complete the task for the user-provided abstract and summary.
+
+Requirements:
+- Do not hallucinate that the shared observation is present in both abstract and summary if it is not.
+- If the summary lists an observation that is not present in the abstract, write in <shared_observation>n/a</shared_observation><explanation>copy unsupported claim</explanation><final_answer>n/a</final_answer>.
+- Your response should be structured using <shared_observation>the shared scientific finding in both abstract and summary whose certainty you're judging</shared_observation> followed by <explanation>brief description of the degree of certainty of the observation in both texts. 1-3 sentences maximum</explanation> and followed by <final_answer></final_answer>.

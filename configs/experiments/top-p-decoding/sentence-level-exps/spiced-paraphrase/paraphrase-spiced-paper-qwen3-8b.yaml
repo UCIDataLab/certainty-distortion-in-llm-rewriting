@@ -1,0 +1,26 @@
+connection_configs:
+    api_key: configs/api_keys/fireworks.txt
+    base_url: https://api.fireworks.ai/inference/v1
+    
+model_configs:
+  model_name: accounts/fireworks/models/qwen3-8b
+  model_device: openai
+  gen_kwargs:
+    temperature: 1.0
+    top_p: 0.9
+    max_tokens: 3000
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "Your task is to paraphrase an English text. When paraphrasing, avoid copying phrases from the provided text. Your paraphrase must be 1 sentence long. Return **only** the paraphrased text using <final_answer></final_answer> tags."
+  n_turns: 5
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/top-p-sampling/paraphrase-spiced-paper/qwen3-8b.jsonl
+  
+
+data_configs:
+  input_path: data/preprocessed/SPICED-news.csv
+  jinja_template: |
+    {{ Paper_Finding }}
+
+

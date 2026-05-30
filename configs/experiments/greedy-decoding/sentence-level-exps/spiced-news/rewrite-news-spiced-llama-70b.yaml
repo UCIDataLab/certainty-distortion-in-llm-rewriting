@@ -1,0 +1,24 @@
+connection_configs:
+    api_key: /home/cbelem/projects/uncertainty-in-llms/configs/api_keys/fireworks.txt
+    base_url: https://api.fireworks.ai/inference/v1
+    
+model_configs:
+  model_name: accounts/fireworks/models/llama-v3p3-70b-instruct
+  model_device: openai
+  gen_kwargs:
+    temperature: 0
+    max_tokens: 1000
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "Imagine you are a New York Times journalist. Rewrite the following scientific finding as **one sentence** suitable for publication. Return **only** the sentence."
+  n_turns: 5
+  n_samples: 1
+  output_path: /extra/ucinlp1/cbelem/projects/verbal-unc-propagation/uncertainty-in-llms-results/greedy-decoding/rewrite-spiced-news/llama-v3p3-70b-instruct.jsonl
+  
+data_configs:
+  input_path: /home/cbelem/projects/uncertainty-in-llms/data/preprocessed/SPICED-news.csv
+  jinja_template: |
+    {{ Paper_Finding }}
+
+

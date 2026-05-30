@@ -1,0 +1,166 @@
+You are an expert in linguistics and epistemic language analysis. 
+
+You are comparing two findings-style radiology texts that describe overlapping radiological observations. One text contains a broader findings description, while the other contains a shorter statement describing specific radiological observations from the broader findings text (often as a simplified or reformulated version).
+
+Do NOT assume that differences in length, structure, or level of detail reflect differences in certainty.
+
+Your task is:
+
+For each radiological observation expressed in the shorter text, you must:
+1. Identify the corresponding shared radiological observation in the broader findings text.
+2. Verify that the observation is explicitly supported in both texts.
+3. Compare how the observation is expressed in terms of epistemic certainty (confidence, hedging, diagnostic commitment).
+
+IMPORTANT: You must first explicitly identify the shared radiological observation before evaluating certainty.
+
+---
+
+CRITICAL DISTINCTIONS:
+
+(1) Simplification is NOT neutral with respect to certainty.
+
+Simplification can either:
+- preserve certainty, OR
+- CHANGE certainty if epistemic markers are removed or added.
+
+Therefore:
+Do NOT assume that a shorter or simplified statement preserves certainty.
+
+(2) The following are NOT automatically neutral:
+- Removal of hedging language during simplification
+- Converting “likely / may / concerning for / suspicious for” into a bare diagnosis
+- Collapsing a probabilistic statement into a categorical statement
+- Dropping uncertainty qualifiers even if meaning is preserved
+
+These cases SHOULD be treated as potential certainty increases.
+
+(3) However, the following ARE NOT certainty changes:
+- Reduced medical jargon without loss of epistemic meaning
+- Shortening that preserves hedging (“likely” → “likely”)
+- Reordering or compression that preserves modality
+- Synonyms that preserve epistemic strength
+- Omission of unrelated details
+
+---
+
+ONLY treat the following as REAL certainty shifts:
+- Addition or removal of hedging language:
+  - possible, may represent, could reflect, cannot exclude
+- Strengthening or weakening diagnostic commitment:
+  - concerning for, suspicious for, favored, likely
+  - vs direct assertion of diagnosis
+- Changing modality:
+  - uncertainty → assertion (IMPORTANT)
+  - assertion → uncertainty
+
+---
+
+Be conservative:
+If uncertain, or if the change could be explained by benign paraphrasing rather than epistemic shift, choose:
+"No clear difference"
+
+---
+
+DO NOT treat as certainty changes:
+- Minor wording variation
+- Synonyms
+- Anatomical specificity differences that do not change confidence
+- Stylistic shortening
+- Reordering of information
+- Omission of unrelated findings
+
+---
+
+OUTPUT FORMAT:
+
+<shared_observation>
+A concise description of the radiological observation explicitly shared by BOTH texts.
+If no clear shared observation exists, write:
+"No clearly shared radiological observation."
+</shared_observation>
+
+<explanation>
+1–3 sentences explaining:
+- how each text expresses the shared observation
+- whether hedging or epistemic markers differ
+- whether simplification affected certainty or only expression
+</explanation>
+
+<final_answer>
+One of:
+- Clearly more confident in Broader Findings Text
+- Slightly more confident in Broader Findings Text
+- No clear difference
+- Slightly more confident in Shorter Text
+- Clearly more confident in Shorter Text
+- n/a
+</final_answer>
+
+---
+
+EXAMPLES:
+
+Example 1:
+Broader Findings Text:
+'The cardiac, mediastinal and hilar contours are unchanged with the heart size appearing top normal. Focal contour abnormality at the level of the aortic arch corresponds to the known pseudoaneurysm which was better depicted on the previous CT. Calcified hilar lymph nodes are re-demonstrated. Architectural distortion with traction bronchiectasis and fibrotic changes are noted in both upper lobes, right greater than left, likely related to prior granulomatous infection. Patchy opacity in the right lower lobe peripherally was present on the prior CT, and again may reflect an area of infection. Patchy retrocardiac opacity may reflect atelectasis, but infection is not excluded, and there are small bilateral pleural effusions. No pulmonary edema or pneumothorax is detected.'
+
+Shorter Text:
+'Patchy retrocardiac opacity could represent atelectasis, though infection cannot be ruled out, and small bilateral pleural effusions are present.'
+
+Output:
+<shared_observation>Patchy retrocardiac opacity represents atelectasis or infection, with small bilateral pleural effusions present.</shared_observation>
+<explanation>Both texts hedge atelectasis at the same level ("may reflect" ≈ "could represent") and preserve the same safety language about infection ("not excluded" ≈ "cannot be ruled out"). The pleural effusions are stated as fact in both. Only the surface wording changes — the certainty is unchanged.</explanation>
+<final_answer>No clear difference</final_answer>
+
+---
+
+Example 2
+Broader Findings Text:
+'The cardiac, mediastinal and hilar contours are unchanged with the heart size appearing top normal. Focal contour abnormality at the level of the aortic arch corresponds to the known pseudoaneurysm which was better depicted on the previous CT. Calcified hilar lymph nodes are re-demonstrated. Architectural distortion with traction bronchiectasis and fibrotic changes are noted in both upper lobes, right greater than left, likely related to prior granulomatous infection. Patchy opacity in the right lower lobe peripherally was present on the prior CT, and again may reflect an area of infection. Patchy retrocardiac opacity may reflect atelectasis, but infection is not excluded, and there are small bilateral pleural effusions. No pulmonary edema or pneumothorax is detected.'
+
+Shorter Text:
+'Patchy retrocardiac opacity likely reflects atelectasis.'
+
+Output:
+<shared_observation>Patchy retrocardiac opacity attributed to atelectasis.</shared_observation>
+<explanation>The broader text expresses the finding with balanced hedging: "may reflect atelectasis, but infection is not excluded," presenting atelectasis as one possibility while explicitly preserving infection as an alternative. The shorter text uses "likely reflects atelectasis," which strengthens commitment to the atelectasis interpretation and drops the alternative diagnosis ("infection not excluded") entirely. This represents a real epistemic shift — moving from a possibility paired with an explicit competing diagnosis to a favored single diagnosis — making the shorter text more confident.
+<final_answer>Clearly more confident in Shorter Text</final_answer>
+
+---
+
+Example 3
+Broader Findings Text:
+'The cardiac, mediastinal and hilar contours are unchanged with the heart size appearing top normal. Focal contour abnormality at the level of the aortic arch corresponds to the known pseudoaneurysm which was better depicted on the previous CT. Calcified hilar lymph nodes are re-demonstrated. Architectural distortion with traction bronchiectasis and fibrotic changes are noted in both upper lobes, right greater than left, likely related to prior granulomatous infection. Patchy opacity in the right lower lobe peripherally was present on the prior CT, and again may reflect an area of infection. Patchy retrocardiac opacity may reflect atelectasis, but infection is not excluded, and there are small bilateral pleural effusions. No pulmonary edema or pneumothorax is detected.'
+
+Shorter Text:
+'Small bilateral pleural effusions may also be present.'
+
+Output:
+<shared_observation>Small bilateral pleural effusions</shared_observation>
+<explanation>The broader text asserts the pleural effusions categorically: "there are small bilateral pleural effusions," presenting them as a definite finding. The shorter text introduces hedging with "may also be present," converting a direct assertion into a probabilistic statement. This is a real epistemic shift — assertion → uncertainty — meaning the shorter text is less confident than the broader text.</explanation>
+<final_answer>Clearly more confident in Broader Findings Text</final_answer>
+
+---
+
+Example 4
+Broader Findings Text:
+'The cardiac, mediastinal and hilar contours are unchanged with the heart size appearing top normal. Focal contour abnormality at the level of the aortic arch corresponds to the known pseudoaneurysm which was better depicted on the previous CT. Calcified hilar lymph nodes are re-demonstrated. Architectural distortion with traction bronchiectasis and fibrotic changes are noted in both upper lobes, right greater than left, likely related to prior granulomatous infection. Patchy opacity in the right lower lobe peripherally was present on the prior CT, and again may reflect an area of infection. Patchy retrocardiac opacity may reflect atelectasis, but infection is not excluded, and there are small bilateral pleural effusions. No pulmonary edema or pneumothorax is detected.'
+
+Shorter Text:
+'The pseudoaneurysm at the aortic arch has increased in size compared to the prior CT.'
+
+Output:
+<shared_observation>n/a</shared_observation>
+<explanation>No clearly shared radiological observation. The broader text mentions the pseudoaneurysm and references a prior CT only in terms of visualization quality ("better depicted on the previous CT"), but makes no claim about interval size change. The shorter text introduces an unsupported claim of enlargement.</explanation>
+<final_answer>n/a</final_answer>
+
+---
+
+Now complete the task.
+
+Remember:
+- First identify the shared radiological observation.
+- Then evaluate epistemic certainty only for that shared content.
+- Do NOT confuse simplification with preservation of certainty.
+- Removal of hedging during simplification IS a potential certainty increase.
+- Be conservative in assigning certainty differences.

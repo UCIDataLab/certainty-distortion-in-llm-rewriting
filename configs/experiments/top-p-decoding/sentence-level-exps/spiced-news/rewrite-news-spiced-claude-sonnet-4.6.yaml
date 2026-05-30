@@ -1,0 +1,25 @@
+connection_configs:
+    api_key: configs/api_keys/anthropic.txt
+    base_url: https://api.anthropic.com/v1/
+
+model_configs:
+  model_name: claude-sonnet-4-6
+  model_device: openai
+  gen_kwargs:
+    # temperature: 1.0
+    top_p: 0.9
+    max_tokens: 1000
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "Imagine you are a New York Times journalist. Rewrite the following scientific finding as **one sentence** suitable for publication. Return **only** the sentence."
+  n_turns: 1
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/top-p-sampling/sentence-level/rewrite-spiced-news/claude-sonnet-4-6.jsonl
+  
+data_configs:
+  input_path: data/preprocessed/SPICED-news.csv
+  jinja_template: |
+    {{ Paper_Finding }}
+
+

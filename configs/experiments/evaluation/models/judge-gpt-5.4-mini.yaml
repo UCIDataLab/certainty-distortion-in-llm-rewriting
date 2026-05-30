@@ -1,0 +1,9 @@
+connection_configs:
+    api_key: /home/cbelem/projects/uncertainty-in-llms/configs/api_keys/openai_eval.txt
+
+model_configs:
+  model_name: gpt-5.4-mini
+  model_device: openai
+  gen_kwargs:
+    temperature: 0.0
+    max_completion_tokens: 5000

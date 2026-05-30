@@ -1,0 +1,30 @@
+connection_configs:
+    api_key: configs/api_keys/gemini.txt
+    base_url: https://generativelanguage.googleapis.com/v1beta/openai/
+
+model_configs:
+  model_name: gemini-3.1-flash-lite-preview
+  model_device: openai
+  gen_kwargs:
+    temperature: 1
+    top_p: 0.9
+    max_tokens: 3500
+    # the default reasoning effort for gemini-3.1-flash-lite is  "minimal"
+    # source: https://ai.google.dev/gemini-api/docs/thinking#levels
+    # reasoning_effort: minimal
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "Your task is to paraphrase an English text. When paraphrasing, avoid copying phrases from the provided text. The paraphrase should be no longer than {n_sentences} sentences. Return **only** the paraphrased text. Do not include a header, preamble, or any text outside the paraphrased text."
+  n_turns: 1
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/top-p-sampling/multi-sentence-level/medical-paraphrase/gemini-3.1-flash-lite.jsonl
+  
+data_configs:
+  input_path: data/preprocessed/MIMIC-CXR_uncertain_only__800.csv
+  jinja_template: |
+    FINDINGS: 
+    
+    {{ FINDINGS }}
+
+

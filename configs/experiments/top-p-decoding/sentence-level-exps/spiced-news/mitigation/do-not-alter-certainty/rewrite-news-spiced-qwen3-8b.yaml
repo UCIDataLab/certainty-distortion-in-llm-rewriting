@@ -1,0 +1,30 @@
+connection_configs:
+    api_key: ""
+    base_url: http://localhost:8892/v1
+    
+model_configs:
+  model_name: Qwen/Qwen3-8B
+  model_device: vllm
+# connection_configs:
+#     api_key: 
+#     base_url: https://api.fireworks.ai/inference/v1
+    
+# model_configs:
+#   model_name: accounts/fireworks/models/qwen3-8b
+#   model_device: openai
+  gen_kwargs:
+    temperature: 1.0
+    top_p: 0.9
+    max_tokens: 3000
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "Imagine you are a New York Times journalist. Rewrite the following scientific finding as **one sentence** suitable for publication. Preserve semantics of the original text. Do not hallucinate. Preserve the degree of certainty in the original text. Return **only** the sentence using <final_answer></final_answer> tags."
+  n_turns: 1
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/mitigation/sentence-level/do-not-alter-certainty/rewrite-spiced-news/qwen3-8b.jsonl
+  
+data_configs:
+  input_path: 
+  jinja_template: |
+    {{ Paper_Finding }}

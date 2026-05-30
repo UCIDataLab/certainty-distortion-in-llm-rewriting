@@ -1,0 +1,24 @@
+connection_configs:
+    api_key: configs/api_keys/openai.txt
+
+model_configs:
+  model_name: gpt-5.4-nano
+  model_device: openai
+  gen_kwargs:
+    temperature: 1.0
+    top_p: 0.9
+    max_completion_tokens: 1000
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "Imagine you are a New York Times journalist. Rewrite the following scientific finding as **one sentence** suitable for publication. Preserve semantics of the original text. Do not hallucinate. Return **only** the sentence."
+  n_turns: 5
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/mitigation/sentence-level/do-not-hallucinate/rewrite-spiced-news/gpt-5-nano.jsonl
+  
+data_configs:
+  input_path: data/preprocessed/SPICED-news.csv
+  jinja_template: |
+    {{ Paper_Finding }}
+
+

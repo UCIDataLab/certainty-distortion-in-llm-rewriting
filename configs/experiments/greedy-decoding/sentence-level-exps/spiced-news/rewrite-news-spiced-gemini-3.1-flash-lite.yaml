@@ -1,0 +1,28 @@
+connection_configs:
+    api_key: /home/cbelem/projects/uncertainty-in-llms/configs/api_keys/gemini.txt
+    base_url: https://generativelanguage.googleapis.com/v1beta/openai/
+
+model_configs:
+  model_name: gemini-3.1-flash-lite-preview
+  model_device: openai
+  gen_kwargs:
+    temperature: 0.0
+    max_tokens: 1000
+    # the default reasoning effort for gemini-3.1-flash-lite is  "minimal"
+    # source: https://ai.google.dev/gemini-api/docs/thinking#levels
+    # reasoning_effort: minimal
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  # system_prompt: "Rewrite the following scientific finding as a single sentence suitable for a New York Times article. Return only the rewritten sentence."
+  system_prompt: "Imagine you are a New York Times journalist. Rewrite the following scientific finding as **one sentence** suitable for publication. Return **only** the sentence."
+  n_turns: 5
+  n_samples: 1
+  output_path: /extra/ucinlp1/cbelem/projects/verbal-unc-propagation/uncertainty-in-llms-results/greedy-decoding/rewrite-spiced-news/gemini-3.1-flash-lite.jsonl
+  
+data_configs:
+  input_path: /home/cbelem/projects/uncertainty-in-llms/data/preprocessed/SPICED-news.csv
+  jinja_template: |
+    {{ Paper_Finding }}
+
+

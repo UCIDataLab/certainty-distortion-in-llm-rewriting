@@ -1,0 +1,28 @@
+connection_configs:
+    api_key: configs/api_keys/gemini.txt
+    base_url: https://generativelanguage.googleapis.com/v1beta/openai/
+
+model_configs:
+  model_name: gemini-3.1-flash-lite-preview
+  model_device: openai
+  gen_kwargs:
+    temperature: 1.0
+    top_p: 0.9
+    max_tokens: 1000
+    # the default reasoning effort for gemini-3.1-flash-lite is  "minimal"
+    # source: https://ai.google.dev/gemini-api/docs/thinking#levels
+    # reasoning_effort: minimal
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "You are simplifying a single sentence from the Findings section of a radiology report.\n\n\nInstructions:\n- Rewrite the sentence in simpler and clearer language.\n- Preserve all clinical information.\n- Do not add new findings or interpretations.\n- Do not omit medically important details.\n- Keep the output as a single sentence.\n- Use concise and natural wording.\n- Avoid unnecessary medical jargon when possible."
+  n_turns: 5
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/top-p-sampling/sentence-level/simplify-medical-finding/gemini-3.1-flash-lite.jsonl
+   
+data_configs:
+  input_path: data/preprocessed/MIMIC-CXR_combined_800.csv
+  jinja_template: |
+    {{ sentence }}
+
+

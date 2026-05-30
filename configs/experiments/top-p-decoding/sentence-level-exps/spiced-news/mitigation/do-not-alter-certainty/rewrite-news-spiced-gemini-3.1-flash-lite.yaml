@@ -1,0 +1,27 @@
+connection_configs:
+    api_key: configs/api_keys/gemini.txt
+    base_url: https://generativelanguage.googleapis.com/v1beta/openai/
+
+model_configs:
+  model_name: gemini-3.1-flash-lite-preview
+  model_device: openai
+  gen_kwargs:
+    temperature: 1.0
+    top_p: 0.9
+    max_tokens: 1000
+    # the default reasoning effort for gemini-3.1-flash-lite is  "minimal"
+    # source: https://ai.google.dev/gemini-api/docs/thinking#levels
+    # reasoning_effort: minimal
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "Imagine you are a New York Times journalist. Rewrite the following scientific finding as **one sentence** suitable for publication. Preserve semantics of the original text. Do not hallucinate. Preserve the degree of certainty in the original text. Return **only** the sentence."
+  n_turns: 1
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/mitigation/sentence-level/do-not-alter-certainty/rewrite-spiced-news/gemini-3.1-flash-lite.jsonl
+
+data_configs:
+  input_path: data/preprocessed/SPICED-news.csv
+  jinja_template: |
+    {{ Paper_Finding }}
+

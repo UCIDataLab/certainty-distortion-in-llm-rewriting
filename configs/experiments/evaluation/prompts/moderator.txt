@@ -1,0 +1,47 @@
+You have expertise in cognitive science and linguistics and specialize in detecting epistemic language. Epistemic language refers to expressions that convey uncertainty, belief, or degree of certainty (e.g., "may", "might", "likely", "suggests", "appears").
+
+In this study, you will compare two versions of the same text and judge which one presents its main finding more confidently or whether the texts communicate the main finding with equal degree of confidence.
+
+---
+
+You are acting as a moderator. Two expert judges evaluated the same pair of texts using the same criteria as you, but reached inconsistent verdicts depending on the order in which the texts were presented:
+
+  Judge 1 (saw [{label_first}, {label_second}]): {first_verdict}
+  Judge 2 (saw [{label_second}, {label_first}]): {second_verdict}
+
+This inconsistency is a strong signal that the difference in epistemic language between the two texts is subtle or weak. Pay particular attention to:
+- Hedging phrases that may differ only in degree (e.g., "suggests" vs. "indicates")
+- Factive vs non-factive verbs 
+- Evidential markers 
+- Stacked vs. single uncertainty markers
+- Whether modal verbs or qualifiers appear in main claims vs. peripheral statements
+- Cases where both texts hedge equally but in different linguistic forms
+
+---
+
+Text {label_first}:
+{text_first}
+
+Text {label_second}:
+{text_second}
+
+Before answering, think step by step about the certainty sources in each text, then provide your final decision.
+
+## Output format
+
+The output should be in the format: 
+
+```
+<explanation>
+your reasoning about the certainty sources of both texts
+</explanation>
+<final_answer>
+your final answer chosen from the set: Clearly {label_first}, Slightly {label_first}, No Clear Difference, Slightly {label_second}, Clearly {label_second}
+</final_answer>
+```
+
+## Requirements
+
+- Think step by step about which of the two texts is more certain, then conclude by selecting one of the provided options as the final answer.
+- Your goal is to make a stable, order-independent judgment. 
+- If no significant difference exists in epistemic language, output "No Clear Difference". Use "No Clear Difference" whenever texts are communicating equal degree of certainty. 

@@ -1,0 +1,27 @@
+connection_configs:
+    api_key: configs/api_keys/anthropic.txt
+    base_url: https://api.anthropic.com/v1/
+
+model_configs:
+  model_name: claude-haiku-4-5-20251001
+  model_device: openai
+  gen_kwargs:
+    top_p: 0.9 
+    max_tokens: 3500
+
+experiment_configs:
+  _class_: experiment_base.MultiNoHistoryExperiment
+  system_prompt: "You are explaining part of a chest X-ray report to a patient who has no medical background.\n\nRewrite the Findings below in simple, plain language a patient can understand.\n\nFormat requirements:\n- Return a numbered list (1., 2., 3., ...).\n\n- Each item must be a single sentence that explains one radiological observation from the Findings.\n- Include between 1 and 8 items, ordered as they appear in the Findings.\n- Use everyday language; avoid medical jargon. If a medical term is unavoidable, briefly explain it.\n- Do not add reassurance, recommendations, or any information not present in the Findings.\n- Do not include a header, preamble, or any text outside the list."
+  n_turns: 1
+  n_samples: 1
+  output_path: output/uncertainty-in-llms-results/top-p-sampling/multi-sentence-level/medical-simplify/claude-haiku-4-5.jsonl
+  
+data_configs:
+  input_path: data/preprocessed/MIMIC-CXR_uncertain_only__800.csv
+  jinja_template: |
+    FINDINGS: 
+
+    {{ FINDINGS }}
+
+
+
