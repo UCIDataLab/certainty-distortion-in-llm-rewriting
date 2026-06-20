@@ -1,5 +1,5 @@
 connection_configs:
-    api_key: /home/cbelem/projects/uncertainty-in-llms/configs/api_keys/gemini.txt
+    api_key: configs/api_keys/gemini.txt
     base_url: https://generativelanguage.googleapis.com/v1beta/openai/
 
 model_configs:

@@ -1,5 +1,5 @@
 connection_configs:
-    api_key: /home/cbelem/projects/uncertainty-in-llms/configs/api_keys/openai.txt
+    api_key: configs/api_keys/openai.txt
 
 model_configs:
   model_name: gpt-5.4-nano

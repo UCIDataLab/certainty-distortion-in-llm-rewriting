@@ -1,5 +1,5 @@
 connection_configs:
-    api_key: /home/cbelem/projects/uncertainty-in-llms/configs/api_keys/fireworks.txt
+    api_key: configs/api_keys/fireworks.txt
     base_url: https://api.fireworks.ai/inference/v1
     
 model_configs:
