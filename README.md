@@ -1,6 +1,4 @@
-# From 'May' to 'Is': Certainty Distortion in Language Model Rewriting
-
-> **Preprint** — to appear on arXiv soon.
+# From 'May' to 'Is': Certainty Distortion in Language Model Rewriting ([preprint](https://arxiv.org/pdf/2606.07951))
 
 **Catarina G Belem, Shang Wu, Hongyu Yao, Mark Steyvers, Sameer Singh, Padhraic Smyth**
 
@@ -58,10 +56,13 @@ We measure certainty distortion using a **pairwise LLM-as-a-judge** approach (`g
 ## Citation
 
 ```bibtex
-@article{belem2026certainty,
-  title   = {From `May' to `Is': Certainty Distortion in Language Model Rewriting},
-  author  = {Belem, Catarina G and Wu, Shang and Yao, Hongyu and Steyvers, Mark and Singh, Sameer and Smyth, Padhraic},
-  journal = {arXiv preprint},
-  year    = {2026}
+@misc{belem-2026-mayiscertaintydistortion,
+      title={From `May' to `Is': Certainty Distortion in Language Model Rewriting}, 
+      author={Catarina G Belem and Shang Wu and Hongyu Yao and Mark Steyvers and Sameer Singh and Padhraic Smyth},
+      year={2026},
+      eprint={2606.07951},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2606.07951}, 
 }
 ```
