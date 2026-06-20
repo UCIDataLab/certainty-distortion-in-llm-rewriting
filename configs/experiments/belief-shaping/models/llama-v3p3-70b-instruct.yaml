@@ -1,0 +1,10 @@
+connection_configs:
+    api_key: /home/cbelem/projects/uncertainty-in-llms/configs/api_keys/fireworks.txt
+    base_url: https://api.fireworks.ai/inference/v1
+    
+model_configs:
+  model_name: accounts/fireworks/models/llama-v3p3-70b-instruct
+  model_device: openai
+  gen_kwargs:
+    temperature: 0
+    max_tokens: 1500

@@ -1,0 +1,5 @@
+system_prompt: |
+  Identify the core proposition in the provided text. Normalize away any differences in epistemic modality (e.g., 'may', 'suggests', 'demonstrates') and state the claim in a certainty-neutral, canonical form.
+  A canonical claim is a certainty-neutral, minimally expressed declarative proposition that captures only the factual content of the text, stripped of hedging, modality, and discourse framing.
+
+user_prompt: "{{ text }}"

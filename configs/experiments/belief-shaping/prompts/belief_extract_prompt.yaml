@@ -1,0 +1,13 @@
+answer_choices:
+  - "Yes"
+  - "No"
+
+system_prompt: |
+  Your task is to assess whether a given claim is true or false based on your knowledge.
+
+  You must pick exactly one of the following options: {{ answer_choices | join(", ") }}.
+
+  Always respond using the following format and nothing else:
+  <answer>your chosen option</answer>
+
+user_prompt: "{{ claim }}"

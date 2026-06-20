@@ -1,0 +1,21 @@
+answer_choices:
+  - "Yes"
+  - "No"
+
+system_prompt: |
+  Your task is to assess whether a given claim is true or false based on a provided text.
+
+  You must pick exactly one of the following options: {{ answer_choices | join(", ") }}.
+
+  - Yes: the text supports the claim.
+  - No: the text contradicts the claim.
+
+  Always respond using the following format and nothing else:
+  <score>a float between 0 and 100 that reflects the probability (expressed as a percentage) of the claim being true, where 0 indicates a 0% chance and 100 indicates a 100% that the claim is true</score>
+  <answer>your chosen option</answer>
+
+user_prompt: |
+  Read this text carefully:
+  '''{{ context }}'''
+
+  Based on the text, do you agree with the claim '{{ claim }}'?
